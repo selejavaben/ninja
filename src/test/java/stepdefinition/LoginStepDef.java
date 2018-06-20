@@ -4,11 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -29,13 +26,16 @@ public class LoginStepDef {
 	public void user_navigates_to_OSCommerce_HomePage() throws Throwable {
 		//driver = new ChromeDriver();
 		String baseUrl = "https://demo.oscommerce.com/index.php";
-		chromeDriver.manage().window().maximize();
-		chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		chromeDriver.get(baseUrl);
 		
-		firefoxDriver.manage().window().maximize();
-		firefoxDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		chromeDriver.get(baseUrl);
+		chromeDriver.manage().window().maximize();
+		chromeDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		
+		
 		firefoxDriver.get(baseUrl);
+		firefoxDriver.manage().window().maximize();
+		firefoxDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		
 	}
 	
 	@Then("^User navigates to account page$")
@@ -69,7 +69,7 @@ public class LoginStepDef {
 		Assert.assertEquals(actual, "https://demo.oscommerce.com/index.php");
 		
 		String actual2 = firefoxDriver.getCurrentUrl();
-		Assert.assertEquals(actual, "https://demo.oscommerce.com/index.php");
+		Assert.assertEquals(actual2, "https://demo.oscommerce.com/index.php");
 	   
 	}
 	
@@ -105,7 +105,7 @@ public class LoginStepDef {
 		Assert.assertEquals(errorMsg, "Welcome, Please Sign In");
 		
 		String errorMsg2 = firefoxDriver.findElement(By.xpath("//h1[text()='Welcome, Please Sign In']")).getText();
-		Assert.assertEquals(errorMsg, "Welcome, Please Sign In");
+		Assert.assertEquals(errorMsg2, "Welcome, Please Sign In");
 	   
 	}
 
